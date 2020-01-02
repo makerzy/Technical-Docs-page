@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <link rel="stylesheet" href="style.css">
+  <title>Technical Documentation Page</title>
+</head>
+<body>
+  <main id="main-doc">
+    <div class="section-nav">
+      <nav class="nav-bar" id="navbar">
+        <header>
+          JSX Documentation
+        </header>
+        <ul>
+          <li>
+            <a class="nav-link" href="#Introduction">Introduction</a>
+          </li>
+          <li>
+            <a class="nav-link"  href="#Why_JSX">Why JSX</a>
+          </li>
+          <li>
+            <a class="nav-link"  href="#Embedding_Expressions_in_JSX">Embedding Expressions in JSX</a>
+          </li>
+          <li>
+            <a class="nav-link"  href="#JSX_is_an_Expression_Too">JSX is an Expression Too</a>
+          </li>
+          <li>
+            <a class="nav-link"   href="#Specifying_Attributes_with_JSX">Specifying Attributes with JSX</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#Warning">Warning</a>
+          </li>
+          <li>
+            <a  class="nav-link" href="#Specifying_Children_with_JSX">Specifying Children with JSX</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#JSX_Prevents_Injection_Attacks">JSX Prevents Injection Attacks</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#JSX_Represents_Object">JSX Represents Object</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#Learn_More">Learn More</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#Reference">Reference</a>
+          </li>
+        </ul> 
+      </nav>
+      <div class="sections">
+        <section class="main-section"  id="Introduction">
+          <header>Introduction</header>
+          <span style="color: #333; font-weight: 100;">Consider this variable declaration:</span>
+          
+          <div class="code">
+            <code>
+              &nbsp;const element = &#60;h1&#62;Hello, world!&#60;/h1&#62;;
+            </code>
+          </div>
+          <p> This funny tag syntax is neither a string nor HTML.</p>
+
+          <p>It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.</p>
+          
+          <p>JSX produces React “elements”. We will explore rendering them to the DOM in the <a href="https://reactjs.org/docs/rendering-elements.html" target="_blank" class="bg-blue">next section</a>. Below, you can find the basics of JSX necessary to get you started.</p>
+        </section>
+        <section class="main-section" id="Why_JSX">
+          <header>Why JSX</header>
+          <p>React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.</p>
+          <p>Instead of artificially separating technologies by putting markup and logic in separate files, React <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank" class="bg-blue">separates concerns</a> with loosely coupled units called “components” that contain both. We will come back to components in a <a href="https://reactjs.org/docs/components-and-props.html" target="_blank" class="bg-blue">further section</a>, but if you’re not yet comfortable putting markup in JS, <a href="https://www.youtube.com/watch?v=x7cQ3mrcKaY" target="_blank" class="bg-blue">this talk</a> might convince you otherwise.</p>
+          <p>React <a href="https://reactjs.org/docs/react-without-jsx.html" target="_blank"  class="bg-blue">doesn’t require</a>  using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.</p>
+          <p> 
+            With that out of the way, let’s get started!</p>
+    
+        </section>
+        <section class="main-section" id="Embedding_Expressions_in_JSX">
+          <header>Embedding Expressions in JSX</header>
+          <p>In the example below, we declare a variable called <span class="bg-yellow">name</span> and then use it inside JSX by wrapping it in curly braces:</p>
+          
+          <div class="code">
+            <code>
+              &nbsp;const name = &apos;Josh Perez&apos;;<br>
+              &nbsp;const element =  &#60;h1&#62;Hello, { name }&#60;/h1&#62;;
+            </code>
+          </div>
+          <div class="code">
+            <code>
+              &nbsp;ReactDOM.render (<br>
+              &nbsp;&nbsp;&nbsp;element,<br>
+              &nbsp;&nbsp;&nbsp;document.getElementById(&apos;root&apos;)<br>
+              &nbsp;);
+            </code>
+          </div>
+          <p>You can put any valid <span class="bg-blue">JavaScript expression</span>inside the curly braces in JSX. for example, <span class="bg-yellow">2 + 2,</span> <span class="bg-yellow">user.firstName,</span> or <span class="bg-yellow">formatName(user)</span> are all valid JavaScript expressions.</p>
+          <p>In the example below, we embed the result of calling a JavaScript function, <span class="bg-yellow">formatName( user )</span>, into an <span class="bg-yellow">&#60;h1&#62;</span>.</p>
+          <div class="code">
+            <code>
+              &nbsp;function formatName( user ) {<br>
+                &nbsp;&nbsp;&nbsp;return user.firstName + &apos; &apos; + user.lastName;<br>
+              &nbsp;}
+            </code>
+            <code>
+              &nbsp;const user = {<br>
+                &nbsp;&nbsp;&nbsp;firstName: &apos;Harper&apos;,<br>
+                &nbsp;&nbsp;&nbsp;lastName: &apos;Perez&apos;<br>
+                &nbsp;};
+            </code>
+            <code>
+                &nbsp;const element = (<br>
+                &nbsp;&nbsp;&nbsp;&#60;h1&#62;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Hello, { formatName( user ) }! <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#60;/h1&#62;<br>
+                &nbsp;);
+            </code>
+              <code>
+                &nbsp;ReactDOM.render (<br>
+                &nbsp;&nbsp;&nbsp;element,<br>
+                &nbsp;&nbsp;&nbsp;document.getElementById( &apos;root&apos; )<br>
+                &nbsp;)
+            </code>
+          </div>
+          
+          <p><a href="https://codepen.io/pen?&editable=true&editors=0010" target="_blank" class="bg-blue" style="font-weight: 600; margin: 50px; padding: 3px;">Try it on CodePen</a></p>
+          <p>We split JSX over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of <a href="https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi" class="bg-blue" target="_blank">automatic semicolon insertion</a>.</p>
+          
+        </section>
+        <section class="main-section" id="JSX_is_an_Expression_Too">
+          <header>JSX is an Expression Too</header>
+          <p>After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.</p>
+          <p>This means that you can use JSX inside of <span class="bg-yellow">if</span> statements and <span class="bg-yellow">for</span> loops, assign it to variables, accept it as arguments, and return it from functions:</p>
+          <div class="code">
+            <code>
+              &nbsp;function getGreeting( user ){<br>
+                &nbsp;&nbsp;&nbsp;if ( user ){<br>
+                &nbsp;&nbsp;&nbsp;return  &#60;h1&#62;Hello, { formatName( user )}! &#60;/h1&#62;;<br>
+                &nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;return  &#60;h1&#62;Hello, Stranger. &#60;/h1&#62;<br>
+                &nbsp;}
+            </code>
+          </div>
+    
+        </section>
+        <section class="main-section" id="Specifying_Attributes_with_JSX">
+          <header>Specifying Attributes with JSX</header>
+          <p>You may use quotes to specify string literals as attributes:</p>
+          <div class="code">
+            <code>
+              &nbsp;const element =  &#60;div tabIndex=&quot;0&quot;&#62; &#60;/div&#62;
+            </code>
+          </div>
+          <p>You may also use curly braces to embed a JavaScript expression in an attribute:</p>
+          <div class="code">
+            <code>
+              &nbsp;const element =  &#60;img src = { user.avatarUrl }&#62; &#60;h1&#62;
+            </code>
+          </div>
+          <p>Don’t put quotes around curly braces when embedding a JavaScript expression in an attribute. You should either use quotes (for string values) or curly braces (for expressions), but not both in the same attribute.</p>
+        </section>
+        <section class="main-section" id="Warning">
+          <header>Warning</header>
+          <p>Since JSX is closer to JavaScript than to HTML, React DOM uses</p>
+          <p><span class="bgyellow">camelCase</span> property naming convention instead of HTML attribute names.</p>
+          <p>For example, <span class="bgyellow">class</span> becomes <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" target="_blank" class="bg-blue">className</a> in JSX, and <span class="bg-yellow">tabindex</span> becomes <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/tabIndex" target="_blank" class="bg-blue">tabIndex</a>.</p>
+    
+        </section>
+        <section class="main-section" id="Specifying_Children_with_JSX">
+          <header>Specifying Children with JSX</header>
+          <p>If a tag is empty, you may close it immediately with <span class="bg-yellow">/></span>, like XML:</p>
+          <div class="code">
+            <code>
+              &nbsp;const element = &#60;img src= { user.avatarUrl } /&#62;
+            </code>
+          </div>
+          <p>JSX tags may contain children:</p>
+          <div class="code">
+            <code>
+              &nbsp;const element = (<br>
+              &nbsp;&nbsp;&nbsp;&#60;div&#62;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;h1&#62;Hello!&#60;h1&#62;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#60;h2&#62;Good to see you here.&#60;/h2&#62;<br>
+              &nbsp;&nbsp;&nbsp;&#60;/div&#62;<br>
+              &nbsp;);
+            </code>
+          </div>
+    
+        </section>
+        <section class="main-section" id="JSX_Prevents_Injection_Attacks">
+          <header>JSX Prevents Injection Attacks</header>
+          <p>It is safe to embed user input in JSX:</p>
+          <div class="code">
+            <code>
+              &nbsp;const title = response.potentiallyMaliciousInput;<br>
+              <span style="color: #58585a; margin: 10px;">// This is safe:</span> <br>
+              &nbsp;const element = &#60;h1&#62;{ title }&#60;/h1&#62;
+            </code>
+          </div>
+          <p>By default, React DOM <a href="https://stackoverflow.com/questions/7381974/which-characters-need-to-be-escaped-in-html" target="_blank" class="bg-blue">escapes</a> any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. This helps prevent <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" class="bg-blue">XSS (cross-site-scripting)</a> attacks.</p>
+
+        </section>
+        <section class="main-section" id="JSX_Represents_Object">
+          <header>JSX Represents Object</header>
+          <p>Babel compiles JSX down to <span class="bg-yellow">React.createElement()</span> calls.</p>
+          <p>These two examples are identical:</p>
+          <div class="code">
+            <code>
+              &nbsp;const element = (<br>
+              &nbsp;&nbsp;&nbsp;&#60;h1 className= &quot;greeting&quot;&#62;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello, world!<br>
+              &nbsp;&nbsp;&nbsp;&#60;/h1&#62;<br>
+              &nbsp;);
+            </code>
+          </div>
+          <div class="code">
+            <code>
+              &nbsp;const element =React.createElement(<br>
+              &nbsp;&nbsp;&nbsp;&apos;h1&apos;,<br>
+              { className: &apos;greeting&apos; },<br>
+              &nbsp;&nbsp;&nbsp;&apos;Hello, world!&apos;<br>
+              &nbsp;);
+            </code>
+          </div>
+          <p><span class="bg-yellow">React.createElement()</span> performs a few checks to help you write bug-free code but essentially it creates an object like this:</p>
+          <div class="code">
+            <code>
+              <span style="color: #58585a; margin: 10px;">// Note: this structure is  simplified</span> <br>
+              &nbsp;const element = {<br>
+                &nbsp;&nbsp;&nbsp;type: &apos;h1&apos;,<br>
+                &nbsp;&nbsp;&nbsp;props: {<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className: &apos;greetings&apos;,<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children: &apos;Hello, world!&apos;<br>
+                &nbsp;&nbsp;&nbsp;}<br>
+              &nbsp;};
+            </code>
+          </div>
+          
+          <p>These objects are called “React elements”. You can think of them as descriptions of what you want to see on the screen. React reads these objects and uses them to construct the DOM and keep it up to date.</p>
+          <p>We will explore rendering React elements to the DOM in the next section.</p>
+        </section>
+        <section class="main-section" id="Learn_More">
+          <header>Learn More</header>
+          <p>you can learn more about React by exploring the listed resources bellow:</p>
+          <ul>
+            <li>
+              <a href="https://reactjs.org/docs/rendering-elements.html"  class="bg-blue" target="_blank">Rendering Elements</a>
+            </li>
+            <li>
+              <a href="https://reactjs.org/docs/components-and-props.html" class="bg-blue" target="_blank">Components and Props</a>
+            </li>
+            <li>
+              <a href="https://reactjs.org/docs/state-and-lifecycle.html" class="bg-blue" target="_blank">state and Lifecycle</a>
+            </li>
+            <li>
+              <a href="https://reactjs.org/docs/handling-events.html" class="bg-blue" target="_blank">Handling Events</a>
+            </li>
+            <li>
+              <a href="https://reactjs.org/docs/conditional-rendering.html" class="bg-blue" target="_blank">Conditional Rendering</a>
+            </li>
+          </ul>
+    
+        </section>
+        <section class="main-section" id="Reference">
+          <header>Reference</header>
+          <ul>
+            <li>All the documentation in this page is taken from <a style="color: blue;" href="https://reactjs.org/docs/introducing-jsx.html" target="_blank">React Docs Page</a>.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    
+  </main>
+</body>
+</html>
